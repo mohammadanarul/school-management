@@ -1,3 +1,54 @@
+> স্কুল মানাজেমেন্ট প্রোজেক্ট
+
+- [ ] Users
+  - [ ] Students
+  - [ ] Assistant Head Teacher
+  - [ ] Committee
+  - [ ] Assistant Teacher
+  - [ ] Office Assistant
+  - [ ] Peon
+
+- [ ] Institute
+  - [ ] name
+  - [ ] established_year
+  - [ ] president
+  - [ ] principal
+  - [ ] sub_domain
+  - [ ] email
+  - [ ] address
+  - [ ] phone_number_1
+  - [ ] phone_number_2
+  - [ ] image
+  - [ ] logo
+  - [ ] description
+  - [ ] timestamp
+- [ ] Institute Type
+  - [ ] institute
+  - [ ] eiin_number
+  - [ ] institute_code
+  - [ ] types
+- [ ] Class
+  - [ ] name
+  - [ ] seats
+  - [ ] room_number
+- [ ] Subjects
+  - [ ] name
+  - [ ] code 
+  - [ ] option [OPTIONAL, MANDATORY]
+  - [ ] type [Primary, Secondary, Hire Secondary, University]
+- [ ] Library
+- [ ] Attendance
+- [ ] Exam
+- [ ] Session year
+  - [ ] Klass
+  - [ ] students []
+  - [ ] years
+- [ ] Assignment
+- [ ] Routine
+- [ ] Events
+- [ ] Settings
+- [ ] Fees
+
 > ইউজার
 
 ```
