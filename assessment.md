@@ -1,13 +1,5 @@
 > স্কুল মানাজেমেন্ট প্রোজেক্ট
 
-- [ ] Users
-  - [ ] Students
-  - [ ] Assistant Head Teacher
-  - [ ] Committee
-  - [ ] Assistant Teacher
-  - [ ] Office Assistant
-  - [ ] Peon
-
 - [ ] Institute
   - [ ] name
   - [ ] established_year
@@ -21,13 +13,10 @@
   - [ ] image
   - [ ] logo
   - [ ] description
-  - [ ] timestamp
-- [ ] Institute Type
-  - [ ] institute
   - [ ] eiin_number
   - [ ] institute_code
   - [ ] types
-- [ ] Class
+- [ ] Klass
   - [ ] name
   - [ ] seats
   - [ ] room_number
@@ -35,30 +24,121 @@
   - [ ] name
   - [ ] code 
   - [ ] option [OPTIONAL, MANDATORY]
-  - [ ] type [Primary, Secondary, Hire Secondary, University]
+  - [ ] type [Primary, Secondary]
+- [ ] Users
+  - [ ] user
+    - [ ] unique_user_id
+    - [ ] fist_name
+    - [ ] last_name
+    - [ ] username
+    - [ ] email
+    - [ ] phone_number
+    - [ ] age
+    - [ ] gender
+    - [ ] address
+    - [ ] role []
+    - [ ] blood_group
+    - [ ] status [Active, Inactive]
+  - [ ] Students Profile
+    - [ ] user
+    - [ ] sessions []
+    - [ ] passport_size_image
+    - [ ] father_name
+    - [ ] mother_name
+    - [ ] father_or_mother_mobile_number
+    - [ ] blood_group
+    - [ ] badge
+  - [ ] Assistant Head Teacher
+    - [ ] father_name
+    - [ ] mother_name
+    - [ ] passport_size_image
+    - [ ] subjects
+    - [ ] grade
+    - [ ] salary
+    - [ ] mobile_numbers
+  - [ ] Committee
+  - [ ] Assistant Teacher
+  - [ ] Office Assistant
+  - [ ] office_staff
+
+- [ ] Degree
+  - [ ] teacher_profile
+  - [ ] choices
+  - [ ] point
+  - [ ] certificate
+  - [ ] session_year
+
 - [ ] Library
+  - [ ] Books
+    - [ ] writer name
+    - [ ] name
+    - [ ] cover_image
+    - [ ] pdf_file
+    - [ ] page_number
+    - [ ] prokasoni
 - [ ] Attendance
-- [ ] Exam
+  - [ ] user
+  - [ ] entry_date_time
+  - [ ] leave_date_time
+  - [ ] status
 - [ ] Session year
   - [ ] Klass
   - [ ] students []
   - [ ] years
+- [ ] Exam
+  - [ ] student
+  - [ ] exam_type [1st exam, 2 exam, final_exam, test_exam]
+  - [ ] session_year
+  - [ ] fees
+  - [ ] total_points
+  - [ ] status [FAIL, PASS]
+- [ ] Exam Subjects
+  - [ ] exam
+  - [ ] student
+  - [ ] point
+  - [ ] subject
+  - [ ] status [ABSEND, PRESENT]
 - [ ] Assignment
-- [ ] Routine
+  - [ ] session_year
+  - [ ] student
+  - [ ] subject
+  - [ ] lessions
+  - [ ] point
+  - [ ] teacher
+  - [ ] status [complete, incomple]
+- [ ] Rutine
+  - [ ] session_year
+  - [ ] klass
+  - [ ] subject
+  - [ ] time
+  - [ ] teacher
+  - [ ] department[generale, since]
 - [ ] Events
+  - [ ] name
+  - [ ] banner
+  - [ ] group_image
+  - [ ] date
+  - [ ] bugest
+  - [ ] cost
 - [ ] Settings
+  - [ ] 
 - [ ] Fees
-
-> ইউজার
-
-```
-first_name: str
-last_name: str
-username: str | unique
-mobile_number: str | unique
-email: str
-role: [enum]
-```
+  - [ ] choices[exam, event, monthly]
+  - [ ] amount
+  - [ ] content_type
+  - [ ] object_id
+  - [ ] content_object[content_type, object_id]
+  - [ ] status[paid, due]
+- [ ] Address
+  - [ ] Country
+  - [ ] Division
+  - [ ] District
+  - [ ] sub_district
+  - [ ] union
+  - [ ] word
+  - [ ] moholla
+  - [ ] house_number | optional
+  - [ ] road_number | optional
 
 - [ ] ছাত্র
 - [ ] গার্জিয়ান
