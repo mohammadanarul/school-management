@@ -82,169 +82,166 @@
   ১। BD Smart School Management REST API অ্যাপ্লিকেশন, এটি ব্যবহারকারীর জন্য ফ্রন্ট-এন্ড ইন্টারফেস অন্তর্ভুক্ত করা হয়নি. এটি শুধুমাত্র ফ্রন্ট-এন্ড, মোবাইল ও ডেস্কটপ অ্যাপ্লিকেশনের জন্য একটি ব্যাক-এন্ড API প্রদান করে।
 
 ১। Entities / Schema / Model
-- [ ] Institute
-  - [ ] name - string
-  - [ ] established_year - date
-  - [ ] president - string
-  - [ ] principal - int
-  - [ ] sub_domain - string
-  - [ ] email - string
-  - [ ] address - string
-  - [ ] phone_number_1 - string
-  - [ ] phone_number_2 - string
-  - [ ] image
-  - [ ] logo
-  - [ ] description - string
-  - [ ] eiin_number - string
-  - [ ] institute_code - string
-  - [ ] types - enum [primary_school, high_school]
+- [x] Institute
+  - [x] name - string
+  - [x] established_year - date
+  - [x] president - string
+  - [x] principal - int
+  - [x] website_domain_address - string
+  - [x] email - string
+  - [x] address - string
+  - [x] phone_number_1 - string
+  - [x] phone_number_2 - string
+  - [x] image
+  - [x] logo
+  - [x] description - string
+  - [x] eiin_number - string
+  - [x] institute_code - string
+  - [x] type - enum [primary_school, high_school]
 
-- [ ] Klass
-  - [ ] name - string
-  - [ ] seats - int
-  - [ ] room_number - int
-- [ ] Subjects
-  - [ ] name - string
-  - [ ] code - number
-  - [ ] option - enum[OPTIONAL, MANDATORY]
-  - [ ] type - enum[primary_school, high_school]
-- [ ] Users
-    - [ ] unique_id - string
-    - [ ] fist_name - string
-    - [ ] last_name - string
-    - [ ] username - string
-    - [ ] email - string
-    - [ ] phone_number - string
-    - [ ] age - string
-    - [ ] gender - enum[MALE, FEMALE, Others]
-    - [ ] address - String
-    - [ ] role - enum[STUDENT, Guardian, Head Teacher, Assistant Head Teacher, Assistant Teacher]
-    - [ ] blood_group - enum[B+, B-, A+, A-,O+,AB+]
-    - [ ] status [Active, Inactive]
-- [ ] Students Profile
-    - [ ] user - int
-    - [ ] sessions - enum[]
-    - [ ] passport_size_image - string
-    - [ ] father_name - string
-    - [ ] mother_name - string
-    - [ ] father_or_mother_mobile_number - string
-    - [ ] badge - string
-- [ ] Guardian Profile
-    - [ ] user - int
-    - [ ] passport_size_image - string
-    - [ ] father_name - string
-    - [ ] mother_name - string
-    - [ ] students - [int, int]
-  - [ ] Staff Profile
-    - [ ] father_name - string
-    - [ ] mother_name - string
-    - [ ] passport_size_image - string
-    - [ ] subjects - enum[int,int]
-    - [ ] grade - string
-    - [ ] salary - int
-    - [ ] mobile_numbers - string
+- [x] Klass
+  - [x] institute - int
+  - [x] name - string
+  - [x] seats - int
+  - [x] room_number - int
+  - [x] type - enum[primary_school, high_school]
+- [x] Subjects
+  - [x] institute - int
+  - [x] name - string
+  - [x] code - number
+  - [x] option - enum[OPTIONAL, MANDATORY]
+  - [x] type - enum[primary_school, high_school]
+- [x] Users
+    - [x] unique_id - string
+    - [x] instiute_id - int
+    - [x] fist_name - string
+    - [x] last_name - string
+    - [x] email - string
+    - [x] phone_number - string
+    - [x] age - string
+    - [x] gender - enum[MALE, FEMALE, Others]
+    - [x] address - String
+    - [x] role - enum[STUDENT, Guardian, Head Teacher, Assistant Head Teacher, Teacher, Assistant Teacher]
+    - [x] join_date - datetime
+    - [x] login_date - datetime
+    - [x] blood_group - enum[B+, B-, A+, A-,O+,AB+]
+    - [x] status [Active, Inactive]
+    - [x] groups - []
+- [x] Students Profile
+    - [x] user - int
+    - [x] sessions - enum[]
+    - [x] passport_size_image - string
+    - [x] father_name - string
+    - [x] mother_name - string
+    - [x] father_or_mother_mobile_number - string
+    - [x] badge - string
+- [x] Guardian Profile
+    - [x] user - int
+    - [x] passport_size_image - string
+    - [x] father_name - string
+    - [x] mother_name - string
+    - [x] students - [int, int]
+- [x] Staff Profile
+  - [x] father_name - string
+  - [x] mother_name - string
+  - [x] passport_size_image - string
+  - [x] subjects - enum[int,int]
+  - [x] grade - string
+  - [x] salary - int
+  - [x] mobile_numbers - string
+  - [x] leave_date - date
   - [ ] Committee
   - [ ] Assistant Teacher
   - [ ] Office Assistant
   - [ ] office_staff
 
-- [ ] Degree
-  - [ ] teacher_profile - int
-  - [ ] choices - enum [SSC, HSC, Honours, Master, PSD, MA, BA]
-  - [ ] point - decimal
-  - [ ] certificate_image - string 
-  - [ ] session_year - date
+- [x] Degree
+  - [x] teacher_profile - int
+  - [x] choices - enum [SSC, HSC, Honours, Master, PSD, MA, BA]
+  - [x] point - decimal
+  - [x] certificate_image - string 
+  - [x] session_year - date
 
-- [ ] Library
-  - [ ] Books
-    - [ ] writer_name - string
-    - [ ] name - string
-    - [ ] cover_image - string
-    - [ ] pdf_file - sting
-    - [ ] page_number - int
-    - [ ] prokasoni_name -  string
-- [ ] Attendance
-  - [ ] user - int
-  - [ ] entry_date_time - time
-  - [ ] leave_date_time - time
-  - [ ] status - enum[PRESENT, ABSENT]
-- [ ] Session year
-  - [ ] Klass - int
-  - [ ] students - [int, int]
-  - [ ] years - number
-- [ ] Exam
-  - [ ] student - int
-  - [ ] exam_type - enum[1st exam, 2 exam, final_exam, test_exam]
-  - [ ] session_year - int
-  - [ ] fees - int
-  - [ ] total_points - decimal
-  - [ ] status - enum[FAIL, PASS]
-- [ ] Exam Subjects
-  - [ ] exam - int
-  - [ ] student - int
-  - [ ] point - decimal
-  - [ ] subject - int
-  - [ ] status - enum[ABSEND, PRESENT]
-- [ ] Assignment
-  - [ ] session_year - int
-  - [ ] student - int
-  - [ ] subject - int 
-  - [ ] lessions - string
-  - [ ] point - decimal
-  - [ ] teacher - int
-  - [ ] status - enum[complete, incomple]
-- [ ] Rutine
-  - [ ] session_year - int
-  - [ ] klass - int
-  - [ ] subject - int
-  - [ ] time - int
-  - [ ] teacher - int
-  - [ ] department- enum[generale, since]
-- [ ] Events
-  - [ ] name - string
-  - [ ] banner - string
-  - [ ] group_image - string
-  - [ ] date - date
-  - [ ] bugest - decimal
-  - [ ] cost - decimal
-- [ ] Fees
-  - [ ] choices - enum[exam, event, monthly]
-  - [ ] amount - decimal
-  - [ ] content_type - int
-  - [ ] object_id - int
-  - [ ] content_object - enum[content_type, object_id]
-  - [ ] status - enum[paid, due]
-- [ ] Address
-  - [ ] Country - int
-  - [ ] Division - int
-  - [ ] District - int
-  - [ ] sub_district - int
-  - [ ] union - int
-  - [ ] word - int
-  - [ ] moholla - string
-  - [ ] house_number - string | null
-  - [ ] road_number - string | null
+- [x] Books
+  - [x] instittue int
+  - [x] writer_name - string
+  - [x] name - string
+  - [x] cover_image - string
+  - [x] pdf_file - sting
+  - [x] page_number - int
+  - [x] prokasoni_name -  string
 
-> ছাত্র, শিক্ষক প্রতিদিন হাজিরা
-- [ ] ছাত্র, শিক্ষক প্রতিদিন প্রতিষ্ঠানে প্রবেশ করেই হাজিরা দিবেন
-- [ ] ছাত্র, শিক্ষক প্রতিদিন প্রতিষ্ঠানে থেকে বের হবার সময় আবার হাজিরা দিতে হবে
-- [ ] যদি ছাত্র বা শিক্ষক ১০টার মধ্যে হাজিরা না দেন তাহলে ছাত্রের বেলায় তার গার্জিয়ানের মোবাইল একটা  মেসেজ যাবে আর শিক্ষকের বেলায় অফিস সহকারী বা করতিপক্কর কাছে একটা মেসেজ যাবে আর তার ছাত্রদের কাছে ও একটা মেসেজ যাবে এবং তার পরিবর্তে কে তাদের ক্লাস নিবে সেটা অফিস করতিপক্ষ জানিয়ে দিবেন
-
-> ক্লাস রুম নাম
-- [ ] ১ম শ্রেণির
-- [ ] ২য় শ্রেণির
-- [ ] ৩য় শ্রেণির
-- [ ] ৪য় শ্রেণির
-- [ ] ৫ম শ্রেণির
-
-> সাবজেক্ট
-- [ ] বাংলা
-- [ ] ইংরেজি
-- [ ] অংক
-
-> সেশন বছর
-- [ ] ক্লাসঃ FK
-- [ ] সাবজেক্টঃ []
-- [ ] ছাত্রঃ []
+- [x] Attendance
+  - [x] user - int
+  - [x] entry_date_time - time
+  - [x] leave_date_time - time
+  - [x] status - enum[PRESENT, ABSENT]
+- [x] Staff Attendance
+  - [x] content_type - int
+  - [x] object_id - time
+  - [x] object_type - time
+  - [x] status - enum[PRESENT, ABSENT]
+  - [x] timestamp
+- [x] Session year
+  - [x] Klass - int
+  - [x] students - [int, int]
+  - [x] years - number
+- [x] Exam
+  - [x] students - []
+  - [x] exam_type - enum[1st exam, 2 exam, final_exam, test_exam]
+  - [x] session_year - int
+  - [x] fees - int
+  - [x] total_points - decimal
+  - [x] status - enum[FAIL, PASS]
+- [x] Exam Attendance
+  - [x] exam - int
+  - [x] student - int
+  - [x] point - decimal
+  - [x] subject - int
+  - [x] status - enum[ABSEND, PRESENT]
+- [x] Assignment
+  - [x] session_year - int
+  - [x] student - int
+  - [x] subject - int 
+  - [x] lessions - string
+  - [x] point - decimal
+  - [x] teacher - int
+  - [x] status - enum[complete, incomple]
+- [x] Rutine
+  - [x] session_year - int
+  - [x] klass - int
+  - [x] subject - int
+  - [x] day - enum[sunday, sturday, monday, tuesday,thusday0]
+  - [x] time - enum[9am, 10am, 11am, 12pm, 1pm, 2pm, 3pm, 5pm]
+  - [x] teacher - int
+  - [x] department- enum[generale, since]
+  - [x] timestamp
+- [x] Events
+  - [x] session_year
+  - [x] name - string
+  - [x] banner - string
+  - [x] group_image - string
+  - [x] date - date
+  - [x] bugest - float
+  - [x] cost - float
+- [x] Fees
+  - [x] choices - enum[exam, event, assignment, monthly]
+  - [x] amount - decimal
+  - [x] content_type - int
+  - [x] object_id - int
+  - [x] content_object - enum[content_type, object_id]
+  - [x] status - enum[paid, due]
+- [x] Address
+  - [x] Country - int
+  - [x] Division - int
+  - [x] District - int
+  - [x] sub_district - int
+  - [x] union - int
+  - [x] word - int
+  - [x] moholla - string
+  - [x] house_number - string | null
+  - [x] road_number - string | null
 
 
+> routune
+> TODO: indivisula routine a multiple teacher add kora jabe and multiple user key abar day select kora jabe jake jedin select kore deya hobe sedin sei teacher class nibe
