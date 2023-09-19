@@ -105,6 +105,7 @@
   - [x] seats - int
   - [x] room_number - int
   - [x] type - enum[primary_school, high_school]
+  - [x] timestamp
 - [x] Subjects
   - [x] institute - int
   - [x] name - string
