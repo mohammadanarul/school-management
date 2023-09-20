@@ -21,6 +21,7 @@ cd school-management
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+python manage.py runserver
 ```
 
 > Django Project Environment Setup and run in `windows`
@@ -28,6 +29,7 @@ pip install -r requirements.txt
 python -m venv venv
 /venv/bin/activate
 pip install -r requirements.txt
+python manage.py runserver
 ```
 
 > pytest and pytest-cov command
