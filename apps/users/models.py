@@ -44,6 +44,5 @@ class User(AbstractBaseUser):
         verbose_name_plural = _("users")
         abstract = True
 
-
     def __str__(self):
         return self.mobile_number
