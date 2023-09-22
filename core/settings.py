@@ -56,7 +56,7 @@ MY_APPS = [
     "apps.events",
 ]
 
-THIRD_PARTY_APPS = ["rest_framework"]
+THIRD_PARTY_APPS = ["rest_framework", "drf_yasg"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
 
