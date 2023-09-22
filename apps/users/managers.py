@@ -2,7 +2,9 @@ from django.contrib.auth.base_user import BaseUserManager
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, mobile_number, email, password=None):
+    def create_user(
+        self, first_name, last_name, mobile_number, email, age, password=None
+    ):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -13,22 +15,30 @@ class CustomUserManager(BaseUserManager):
             raise ValueError("Users must have an email address")
 
         user = self.model(
+            first_name=first_name,
+            last_name=last_name,
             mobile_number=mobile_number,
             email=self.normalize_email(email),
+            age=age,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, mobile_number, email, password=None):
+    def create_superuser(
+        self, first_name, last_name, mobile_number, email, age, password=None
+    ):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
         """
         user = self.create_user(
-            mobile_number=mobile_number,
-            email=email,
+            first_name,
+            last_name,
+            mobile_number,
+            email,
+            age=age,
             password=password,
         )
         user.is_staff = True
