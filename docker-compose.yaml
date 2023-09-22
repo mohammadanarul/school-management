@@ -1,0 +1,66 @@
+version: "3.9"
+
+services:
+   web:
+      build:
+         context: .
+         dockerfile: Dockerfile
+      command: python manage.py runserver 0.0.0.0:8000
+      ports:
+         - 8000:8000
+      volumes:
+         - .:/app
+      env_file:
+         - .env
+      restart: "on-failure"
+      depends_on:
+         - db
+      networks:
+        - school_management
+   db:
+     image: postgres
+     container_name: local_pgdb
+     restart: always
+     ports:
+       - "5432:5432"
+     environment:
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: root
+     volumes:
+       - local_pgdata:/var/lib/postgresql/data
+     networks:
+       - school_management
+
+   pgadmin:
+     image: dpage/pgadmin4
+     container_name: pgadmin4_container
+     restart: always
+     ports:
+       - "8888:80"
+     environment:
+       PGADMIN_DEFAULT_EMAIL: info@gmail.com
+       PGADMIN_DEFAULT_PASSWORD: root
+     volumes:
+       - pgadmin-data:/var/lib/pgadmin
+     networks:
+       - school_management
+
+#   nginx:
+#      restart: always
+#      depends_on:
+#         - web
+#      build:
+#         context: .
+#         dockerfile: Dockerfile
+#      ports:
+#         - 8080:80
+#      networks:
+#         - school_management
+
+networks:
+   school_management:
+      driver: bridge
+
+volumes:
+  local_pgdata:
+  pgadmin-data:
