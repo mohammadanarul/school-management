@@ -55,9 +55,7 @@ class ExamAttendance(BaseEntity):
         verbose_name=_("session"),
         on_delete=models.RESTRICT,
     )
-    exam = models.ForeignKey(
-        Exam, verbose_name=_("exam"), on_delete=models.RESTRICT
-    )
+    exam = models.ForeignKey(Exam, verbose_name=_("exam"), on_delete=models.RESTRICT)
     student = models.ForeignKey(
         Student, verbose_name=_("student"), on_delete=models.CASCADE
     )
