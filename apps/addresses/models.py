@@ -1,9 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import get_user_model
 from apps.helpers.models import BaseEntity
-
-User = get_user_model()
+from apps.users.models import User
 
 
 class Country(BaseEntity):
@@ -62,13 +60,26 @@ class Word(BaseEntity):
 
 
 class Address(BaseEntity):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    division = models.ForeignKey(Division, on_delete=models.CASCADE)
-    district = models.ForeignKey(District, on_delete=models.CASCADE)
-    sub_district = models.ForeignKey(SubDistrict, on_delete=models.CASCADE)
-    union = models.ForeignKey(Union, on_delete=models.CASCADE)
-    word = models.ForeignKey(Word, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, verbose_name=_("user"), on_delete=models.CASCADE, related_name="addresses"
+    )
+    country = models.ForeignKey(
+        Country, verbose_name=_("country"), on_delete=models.CASCADE
+    )
+    division = models.ForeignKey(
+        Division, verbose_name=_("division"), on_delete=models.CASCADE
+    )
+    district = models.ForeignKey(
+        District, verbose_name=_("district"), on_delete=models.CASCADE
+    )
+    sub_district = models.ForeignKey(
+        SubDistrict, verbose_name=_("sub district"), on_delete=models.CASCADE
+    )
+    union = models.ForeignKey(Union, verbose_name=_("union"), on_delete=models.CASCADE)
+    word = models.ForeignKey(Word, verbose_name=_("word"), on_delete=models.CASCADE)
     moholla = models.CharField(_("moholla"), max_length=150)
     road_number = models.CharField(_("road number"), max_length=100)
     house_number = models.CharField(_("house number"), max_length=100)
+
+    def __str__(self):
+        return self.user.first_name
