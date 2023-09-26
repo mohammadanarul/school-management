@@ -3,8 +3,6 @@ from django.utils.translation import gettext_lazy as _
 from apps.helpers.models import BaseEntity
 from apps.helpers.utils import InstituteTypes, SubjectType
 
-# from apps.users.models import Student
-
 
 class Institute(BaseEntity):
     name = models.CharField(_("name"), max_length=255)
@@ -20,8 +18,10 @@ class Institute(BaseEntity):
     logo = models.ImageField(_("logo"), upload_to="institute-logo-images/")
     eiin_number = models.CharField(_("eiin_number"), max_length=100)
     institute_code = models.CharField(_("code"), max_length=100)
-    type = models.SmallIntegerField(
-        _("type"), choices=InstituteTypes.choices, default=InstituteTypes.PRIMARY
+    institute_type = models.SmallIntegerField(
+        _("institute type"),
+        choices=InstituteTypes.choices,
+        default=InstituteTypes.PRIMARY,
     )
     institute_about = models.TextField(
         _("about"),
@@ -37,8 +37,8 @@ class Subject(BaseEntity):
     )
     name = models.CharField(_("name"), max_length=150)
     code = models.SmallIntegerField(_("code"))
-    type = models.SmallIntegerField(
-        _("type"), choices=SubjectType.choices, default=SubjectType.MANDATORY
+    subject_type = models.SmallIntegerField(
+        _("subject type"), choices=SubjectType.choices, default=SubjectType.MANDATORY
     )
 
     @property

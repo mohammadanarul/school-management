@@ -160,3 +160,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 .$bd-smart-school-management.drawio.bkp
+.$bd-smart-school-management.drawio.dtmp
+migrations/
+__pycache__/
+.vscode/

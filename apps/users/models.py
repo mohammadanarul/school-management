@@ -15,10 +15,11 @@ from apps.institutes.models import Subject
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    unique_id = models.BigAutoField(primary_key=True, unique=True)
     first_name = models.CharField(_("first name"), max_length=150, blank=True)
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
     mobile_number = models.CharField(
-        _("username"),
+        _("mobile number"),
         validators=[phone_number_validator],
         max_length=150,
         unique=True,
@@ -111,11 +112,13 @@ class Certificate(BaseEntity):
         on_delete=models.CASCADE,
         related_name="certificates",
     )
-    type = models.SmallIntegerField(_("type"), choices=CertificateType.choices)
+    certificate_type = models.SmallIntegerField(
+        _("type"), choices=CertificateType.choices
+    )
     gpa = models.FloatField(_("GPA"))
     session_year = models.SmallIntegerField(_("session year"))
     image = models.ImageField(
-        _("image"), help_text="Certificate Image", upload_to="certificates"
+        _("image"), help_text="Certificate Image", upload_to="users/certificates/"
     )
 
     @property

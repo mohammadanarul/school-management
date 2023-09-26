@@ -244,5 +244,5 @@
   - [x] road_number - string | null
 
 
-> routune
+> routine
 > TODO: indivisula routine a multiple teacher add kora jabe and multiple user key abar day select kora jabe jake jedin select kore deya hobe sedin sei teacher class nibe

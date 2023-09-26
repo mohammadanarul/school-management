@@ -19,7 +19,7 @@ class Exam(BaseEntity):
     students = models.ManyToManyField(
         Student, verbose_name=_("students"), related_name="my_exams"
     )
-    type = models.SmallIntegerField(_("type"), choices=ExamType.choices)
+    exam_type = models.SmallIntegerField(_("type"), choices=ExamType.choices)
     status = models.SmallIntegerField(_("status"), choices=ExamStatus.choices)
 
     def __str__(self):
