@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from apps.helpers.models import BaseEntity
 from apps.helpers.utils import ExamType, ExamStatus
 from apps.users.models import Student
-from apps.institutes.models import Institute, Session
+from apps.institutes.models import Institute, Session, Subject
 
 
 class Exam(BaseEntity):
@@ -20,3 +20,13 @@ class Exam(BaseEntity):
 
     def __str__(self):
         return f"{self.session.year}-{self.get_status_display()}"
+
+
+class ExamResult(BaseEntity):
+    exam = models.ForeignKey(Exam, verbose_name=_("exam"))
+    student = models.ForeignKey(Student, verbose_name=_("students"), related_name="my_exam_results")
+    subject = models.ForeignKey(Subject, verbose_name=_("subject"))
+    gpa = models.FloatField(_("gpa"))
+
+    def __str__(self) -> str:
+        return f"{self.subject.name}-{self.gpa}"
