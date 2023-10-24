@@ -1,4 +1,4 @@
-from rest_framework_simplejwt.authentication import JWTTokenUserAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.viewsets import ModelViewSet
 from apps.helpers.mixins import DeleteModelMixin
@@ -7,7 +7,7 @@ from apps.libraries.serializers import LibrarySerializer, BookSerializer
 
 
 class LibraryModelViewSet(DeleteModelMixin, ModelViewSet):
-    authentication_classes = [JWTTokenUserAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Library.objects.all()
     serializer_class = LibrarySerializer
@@ -20,7 +20,7 @@ class LibraryModelViewSet(DeleteModelMixin, ModelViewSet):
 
 
 class BookModelViewSet(DeleteModelMixin, ModelViewSet):
-    authentication_classes = [JWTTokenUserAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Book.objects.all()
     serializer_class = BookSerializer

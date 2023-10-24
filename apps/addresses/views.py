@@ -1,7 +1,7 @@
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.viewsets import ModelViewSet
-from rest_framework_simplejwt.authentication import JWTTokenUserAuthentication
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 from apps.helpers.mixins import DeleteModelMixin
 from apps.addresses.models import (
     Country,
@@ -9,7 +9,7 @@ from apps.addresses.models import (
     District,
     SubDistrict,
     Union,
-    Word,
+    Ward,
     Address,
 )
 from apps.addresses.serializers import (
@@ -18,13 +18,13 @@ from apps.addresses.serializers import (
     DistrictSerializer,
     SubDistrictSerializer,
     UnionSerializer,
-    WordSerializer,
+    WardSerializer,
     AddressSerializer,
 )
 
 
 class CountyModelViewSet(DeleteModelMixin, ModelViewSet):
-    authentication_classes = [JWTTokenUserAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
@@ -37,7 +37,7 @@ class CountyModelViewSet(DeleteModelMixin, ModelViewSet):
 
 
 class DivisionModelViewSet(DeleteModelMixin, ModelViewSet):
-    authentication_classes = [JWTTokenUserAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Division.objects.all()
     serializer_class = DivisionSerializer
@@ -50,6 +50,8 @@ class DivisionModelViewSet(DeleteModelMixin, ModelViewSet):
 
 
 class DistrictModelViewSet(DeleteModelMixin, ModelViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = District.objects.all()
     serializer_class = DistrictSerializer
 
@@ -61,6 +63,8 @@ class DistrictModelViewSet(DeleteModelMixin, ModelViewSet):
 
 
 class SubDistrictModelViewSet(DeleteModelMixin, ModelViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = SubDistrict.objects.all()
     serializer_class = SubDistrictSerializer
 
@@ -72,6 +76,8 @@ class SubDistrictModelViewSet(DeleteModelMixin, ModelViewSet):
 
 
 class UnionModelViewSet(DeleteModelMixin, ModelViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Union.objects.all()
     serializer_class = UnionSerializer
 
@@ -82,9 +88,11 @@ class UnionModelViewSet(DeleteModelMixin, ModelViewSet):
             return [IsAuthenticated()]
 
 
-class WordModelViewSet(DeleteModelMixin, ModelViewSet):
-    queryset = Word.objects.all()
-    serializer_class = WordSerializer
+class WardModelViewSet(DeleteModelMixin, ModelViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = Ward.objects.all()
+    serializer_class = WardSerializer
 
     def get_permissions(self):
         if self.action == "list" or self.action == "retrieve":
@@ -94,7 +102,7 @@ class WordModelViewSet(DeleteModelMixin, ModelViewSet):
 
 
 class AddressModelViewSet(DeleteModelMixin, ModelViewSet):
-    authentication_classes = [JWTTokenUserAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Address.objects.all()
     serializer_class = AddressSerializer

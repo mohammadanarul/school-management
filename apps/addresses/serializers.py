@@ -5,7 +5,7 @@ from apps.addresses.models import (
     District,
     SubDistrict,
     Union,
-    Word,
+    Ward,
     Address,
 )
 
@@ -40,9 +40,9 @@ class UnionSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class WordSerializer(serializers.ModelSerializer):
+class WardSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Word
+        model = Ward
         fields = "__all__"
 
 

@@ -1,6 +1,15 @@
 from rest_framework.mixins import DestroyModelMixin
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
+
+
+class ModelViewSetMixin(ModelViewSet):
+    def perform_create(self, serializer):
+        serializer.save(created_by_id=self.request.user.id, updated_by_id=self.request.user.id)
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by_id=self.request.user.id)
 
 
 class DeleteModelMixin(DestroyModelMixin):
@@ -17,6 +26,4 @@ class DeleteModelMixin(DestroyModelMixin):
                     status=status.HTTP_406_NOT_ACCEPTABLE,
                 )
         else:
-            return Response(
-                {"message": "unauthorized"}, status=status.HTTP_401_UNAUTHORIZED
-            )
+            return Response({"message": "unauthorized"}, status=status.HTTP_401_UNAUTHORIZED)

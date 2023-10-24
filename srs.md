@@ -208,8 +208,7 @@
   - [x] point - decimal
   - [x] teacher - int
   - [x] status - enum[complete, incomple]
-- [x] Rutine
-  - [x] session_year - int
+- [x] Routine
   - [x] klass - int
   - [x] subject - int
   - [x] day - enum[sunday, sturday, monday, tuesday,thusday0]

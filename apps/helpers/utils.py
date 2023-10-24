@@ -11,8 +11,8 @@ class UserRoles(models.IntegerChoices):
     ADMIN = 1, _("Admin")
     STUDENT = 2, _("Student")
     HEAD_TEACHER = 3, _("Head Teacher")
-    HEAD_ASSISTANT_HEAD_TEACHER = 4, _("Assistant Head Teacher")
-    ASSISTANT_HEAD_TEACHER = 5, _("Assistant Teacher")
+    ASSISTANT_HEAD_TEACHER = 4, _("Assistant Head Teacher")
+    ASSISTANT_TEACHER = 5, _("Assistant Teacher")
     STAFF = 6, _("Staff")
 
 
@@ -81,17 +81,33 @@ class ExamStatus(models.IntegerChoices):
 
 
 class FeeTypes(models.IntegerChoices):
-    EXAM = 1, "Exam"
-    EVENT = 2, "Event"
-    MONTHLY = 3, "Monthly"
-    YEARLY = 4, "Yearly"
+    EXAM = 1, _("Exam")
+    EVENT = 2, _("Event")
+    MONTHLY = 3, _("Monthly")
+    YEARLY = 4, _("Yearly")
 
 
 class FeeStatus(models.IntegerChoices):
-    PAID = 1, "Active"
-    DUE = 2, "Expired"
+    PAID = 1, _("Active")
+    DUE = 2, _("Expired")
 
 
 class AttendanceType(models.IntegerChoices):
-    PRESENT = 1, "PRESENT"
-    ABSENT = 2, "ABSENT"
+    PRESENT = 1, _("PRESENT")
+    ABSENT = 2, _("ABSENT")
+
+
+class Religions(models.IntegerChoices):
+    ISLAM = 1, "ISLAM"
+    HINDU = 2, "HINDU"
+    BODTHO = 3, "BODTHO"
+    CHRISTIAN = 4, "CHRISTIAN"
+
+
+class DayChoices(models.TextChoices):
+    SATURDAY = "SATURDAY", _("SATURDAY")
+    SUNDAY = "SUNDAY", _("SUNDAY")
+    MONDAY = "MONDAY", _("MONDAY")
+    TUESDAY = "TUESDAY", _("TUESDAY")
+    WEDNESDAY = "WEDNESDAY", _("WEDNESDAY")
+    THURSDAY = "THURSDAY", _("THURSDAY")

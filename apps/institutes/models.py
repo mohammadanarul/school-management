@@ -32,9 +32,7 @@ class Institute(BaseEntity):
 
 
 class Subject(BaseEntity):
-    institute = models.ForeignKey(
-        Institute, verbose_name=_("institute"), on_delete=models.CASCADE
-    )
+    institute = models.ForeignKey(Institute, verbose_name=_("institute"), on_delete=models.CASCADE)
     name = models.CharField(_("name"), max_length=150)
     code = models.SmallIntegerField(_("code"))
     subject_type = models.SmallIntegerField(
@@ -42,40 +40,32 @@ class Subject(BaseEntity):
     )
 
     @property
-    def type_name(self):
-        return self.get_type_display()
+    def subject_type_name(self):
+        return self.get_subject_type_display()
 
     def __str__(self):
         return f"{self.code}-{self.name}"
 
 
 class Klass(BaseEntity):
-    institute = models.ForeignKey(
-        Institute, verbose_name=_("institute"), on_delete=models.CASCADE
-    )
+    institute = models.ForeignKey(Institute, verbose_name=_("institute"), on_delete=models.CASCADE)
     name = models.CharField(_("name"), max_length=100)
     seats = models.SmallIntegerField(_("seats"))
-    subjects = models.ManyToManyField(
-        Subject, verbose_name=_("subjects"), related_name="klass_list"
-    )
+    subjects = models.ManyToManyField(Subject, verbose_name=_("subjects"), related_name="klass_list")
 
     def __str__(self):
         return self.name
 
 
 class Session(BaseEntity):
-    institute = models.ForeignKey(
-        Institute, verbose_name=_("institute"), on_delete=models.CASCADE
-    )
+    institute = models.ForeignKey(Institute, verbose_name=_("institute"), on_delete=models.CASCADE)
     klass = models.ForeignKey(
         Klass,
         verbose_name=_("klass"),
         on_delete=models.CASCADE,
         related_name="sessions",
     )
-    students = models.ManyToManyField(
-        "users.Student", verbose_name=_("students"), related_name="sessions"
-    )
+    students = models.ManyToManyField("users.Student", verbose_name=_("students"), related_name="sessions")
     year = models.SmallIntegerField(_("year"))
 
     def __str__(self):

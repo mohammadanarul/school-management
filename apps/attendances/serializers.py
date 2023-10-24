@@ -5,13 +5,13 @@ from apps.attendances.models import StaffAttendance, Attendance, ExamAttendance
 class AttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
-        exclude = ("students",)
+        fields = "__all__"
 
 
 class StaffAttendanceSerializer(serializers.ModelSerializer):
     class Meta:
-        mdoel = StaffAttendance
-        exclude = ("staff",)
+        model = StaffAttendance
+        fields = "__all__"
 
 
 class ExamAttendaceSerializer(serializers.ModelSerializer):

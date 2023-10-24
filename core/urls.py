@@ -24,9 +24,13 @@ urlpatterns = [
         include(
             [
                 path("", include("apps.users.urls")),
+                path("", include("apps.events.urls")),
                 path("", include("apps.addresses.urls")),
                 path("", include("apps.institutes.urls")),
                 path("", include("apps.libraries.urls")),
+                path("", include("apps.exams.urls")),
+                path("", include("apps.routines.urls")),
+                path("", include("apps.attendances.urls")),
             ]
         ),
     ),

@@ -1,28 +1,23 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework_simplejwt.authentication import JWTTokenUserAuthentication
-from rest_framework.permissions import AllowAny, IsAdminUser
-from apps.users.models import User
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAdminUser
+from apps.helpers.mixins import DeleteModelMixin
+from apps.users.models import Staff, Student
 from apps.users.serializers import (
     StudentSerializer,
     StaffSerializer,
 )
 
 
-class StudentModelViewSet(ModelViewSet):
-    authentication_classes = [JWTTokenUserAuthentication]
+class StudentModelViewSet(DeleteModelMixin, ModelViewSet):
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminUser]
-    queryset = User.objects.all()
+    queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
 
-class StaffModelViewSet(ModelViewSet):
-    authentication_classes = [JWTTokenUserAuthentication]
+class StaffModelViewSet(DeleteModelMixin, ModelViewSet):
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminUser]
-    queryset = User.objects.all()
+    queryset = Staff.objects.all()
     serializer_class = StaffSerializer
-
-    def get_permissions(self):
-        if self.action == "list":
-            return [AllowAny()]
-        else:
-            return [IsAdminUser()]

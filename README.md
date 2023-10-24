@@ -34,6 +34,20 @@ python manage.py runserver
 
 > pytest and pytest-cov command
 ```commandline
-pytest
+pytest or pytest -rP
 pytest --cov
+```
+> single test file run command bleow
+```
+pytest apps/app_name/tests/test_file_name.py -rP
+```
+
+> single function test run command bleow
+```
+pytest apps/app_name/tests/test_file_name.py::TestClassName::test_function_name -rP
+```
+
+> pytest-code coverage html report command
+```
+pytest --cov --cov-report=html:htmlcov
 ```

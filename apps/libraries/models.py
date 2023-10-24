@@ -5,11 +5,12 @@ from apps.institutes.models import Institute
 
 
 class Library(BaseEntity):
-    institute = models.OneToOneField(
-        Institute, verbose_name=_("institute"), on_delete=models.CASCADE
-    )
+    institute = models.OneToOneField(Institute, verbose_name=_("institute"), on_delete=models.CASCADE)
     name = models.CharField(_("name"), max_length=255)
     established_date = models.DateField(_("established date"))
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Book(BaseEntity):
@@ -21,9 +22,7 @@ class Book(BaseEntity):
     )
     writer_name = models.CharField(_("writer_name"), max_length=255)
     name = models.CharField(_("writer_name"), max_length=255)
-    cover_image = models.ImageField(
-        _("cover_image"), upload_to="library/books/cover-images/"
-    )
+    cover_image = models.ImageField(_("cover_image"), upload_to="library/books/cover-images/")
     pdf_file = models.FileField(_("pdf file"), upload_to="library/books/pdfs/")
     page_number = models.CharField(_("page number"), max_length=20)
     publication = models.CharField(_("publication"), max_length=250)

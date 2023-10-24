@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework_simplejwt.authentication import JWTTokenUserAuthentication
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from apps.helpers.mixins import DeleteModelMixin
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
+from apps.helpers.mixins import DeleteModelMixin, ModelViewSetMixin
 from apps.institutes.models import Institute, Subject, Klass, Session
 from apps.institutes.serializers import (
     InstituteSerializer,
@@ -11,9 +11,9 @@ from apps.institutes.serializers import (
 )
 
 
-class InstituteModelViewSet(DeleteModelMixin, ModelViewSet):
-    authentication_classes = [JWTTokenUserAuthentication]
-    permission_classes = [IsAuthenticated]
+class InstituteModelViewSet(DeleteModelMixin, ModelViewSetMixin):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAdminUser]
     queryset = Institute.objects.all()
     serializer_class = InstituteSerializer
 
@@ -21,11 +21,11 @@ class InstituteModelViewSet(DeleteModelMixin, ModelViewSet):
         if self.action == "retrieve":
             return [AllowAny()]
         else:
-            return [IsAuthenticated()]
+            return [IsAdminUser()]
 
 
-class SubjectModelViewSet(DeleteModelMixin, ModelViewSet):
-    authentication_classes = [JWTTokenUserAuthentication]
+class SubjectModelViewSet(DeleteModelMixin, ModelViewSetMixin):
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Subject.objects.all()
     serializer_class = SubjectSerialiser
@@ -37,8 +37,8 @@ class SubjectModelViewSet(DeleteModelMixin, ModelViewSet):
             return [IsAuthenticated()]
 
 
-class KlassModelViewSet(ModelViewSet):
-    authentication_classes = [JWTTokenUserAuthentication]
+class KlassModelViewSet(ModelViewSetMixin):
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Klass.objects.all()
     serializer_class = KlassSerializer
@@ -50,8 +50,8 @@ class KlassModelViewSet(ModelViewSet):
             return [IsAuthenticated()]
 
 
-class SessionModelViewSet(ModelViewSet):
-    authentication_classes = [JWTTokenUserAuthentication]
+class SessionModelViewSet(ModelViewSetMixin):
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
