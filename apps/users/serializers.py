@@ -1,8 +1,6 @@
-import json
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from drf_writable_nested import WritableNestedModelSerializer
-from apps.users.models import StaffProfile, Student, User, Staff, Certificate
+from apps.users.models import StaffProfile, Student, User, Certificate
 
 
 class CertificateSerializer(serializers.ModelSerializer):
