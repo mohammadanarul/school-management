@@ -23,9 +23,11 @@ class Exam(BaseEntity):
 
 
 class ExamResult(BaseEntity):
-    exam = models.ForeignKey(Exam, verbose_name=_("exam"))
-    student = models.ForeignKey(Student, verbose_name=_("students"), related_name="my_exam_results")
-    subject = models.ForeignKey(Subject, verbose_name=_("subject"))
+    exam = models.ForeignKey(Exam, verbose_name=_("exam"), on_delete=models.CASCADE)
+    student = models.ForeignKey(
+        Student, verbose_name=_("students"), on_delete=models.CASCADE, related_name="my_exam_results"
+    )
+    subject = models.ForeignKey(Subject, verbose_name=_("subject"), on_delete=models.CASCADE)
     gpa = models.FloatField(_("gpa"))
 
     def __str__(self) -> str:
