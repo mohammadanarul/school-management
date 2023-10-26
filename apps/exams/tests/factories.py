@@ -1,6 +1,7 @@
 import factory
-from apps.exams.models import Exam
-from apps.institutes.tests.factories import InstituteFactory, SessionFactory
+from apps.users.tests.factories import StudentFactory
+from apps.exams.models import Exam, ExamResult
+from apps.institutes.tests.factories import InstituteFactory, SessionFactory, SubjectFactory
 
 
 class ExamFactory(factory.django.DjangoModelFactory):
@@ -19,3 +20,13 @@ class ExamFactory(factory.django.DjangoModelFactory):
 
         if extracted:
             self.students.set(extracted)
+
+
+class ExamResultFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ExamResult
+
+    exam = factory.SubFactory(ExamFactory)
+    student = factory.SubFactory(StudentFactory)
+    subject = factory.SubFactory(SubjectFactory)
+    gpa = 3.20
