@@ -10,7 +10,7 @@ fake = Faker()
 class TestExamModelViewSet:
     base_url = "/api/v1/exams"
 
-    def test_exam_list_api(self, api_client, admin_user_token, exam_factory):
+    def test_list_api(self, api_client, admin_user_token, exam_factory):
         exam_factory.create_batch(13)
         jwt_token = admin_user_token
         api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {jwt_token['access_token']}")
@@ -23,7 +23,7 @@ class TestExamModelViewSet:
         assert response.status_code == status.HTTP_200_OK
         assert len(response.data["results"]) == 3
 
-    def test_exam_retrieve_api(self, api_client, admin_user_token, exam_factory):
+    def test_retrieve_api(self, api_client, admin_user_token, exam_factory):
         exam = exam_factory.create()
         jwt_token = admin_user_token
         api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {jwt_token['access_token']}")
@@ -31,7 +31,7 @@ class TestExamModelViewSet:
         assert response.status_code == status.HTTP_200_OK
         assert type(response.json()) == dict
 
-    def test_exam_create_api(self, api_client, admin_user_token, institute_factory, session_factory, student_factory):
+    def test_create_api(self, api_client, admin_user_token, institute_factory, session_factory, student_factory):
         students = student_factory.create_batch(2)
         json_data = {
             "institute": institute_factory.create().id,
@@ -52,7 +52,7 @@ class TestExamModelViewSet:
         assert response_json["students"] == json_data["students"]
         assert type(response_json) == dict
 
-    def test_exam_update_api(
+    def test_update_api(
         self, api_client, admin_user_token, exam_factory, institute_factory, session_factory, student_factory
     ):
         exam = exam_factory.create()
@@ -82,7 +82,7 @@ class TestExamModelViewSet:
         assert response_json["status"] != exam.status
         assert type(response_json) == dict
 
-    def test_exam_patch_update_api(self, api_client, admin_user_token, exam_factory, student_factory):
+    def test_patch_update_api(self, api_client, admin_user_token, exam_factory, student_factory):
         exam = exam_factory.create()
         students = student_factory.create_batch(2)
         json_data = {
@@ -102,7 +102,7 @@ class TestExamModelViewSet:
         assert response_json["status"] != exam.status
         assert type(response_json) == dict
 
-    def test_exam_delete_api(self, api_client, admin_user_token, exam_factory):
+    def test_delete_api(self, api_client, admin_user_token, exam_factory):
         exam = exam_factory.create()
         jwt_token = admin_user_token
         api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {jwt_token['access_token']}")
