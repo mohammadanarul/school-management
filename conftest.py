@@ -3,7 +3,7 @@ from pytest_factoryboy import register
 from rest_framework.test import APIClient
 from django.urls import reverse
 from apps.institutes.tests.factories import InstituteFactory, SubjectFactory, KlassFactory, SessionFactory
-from apps.exams.tests.factories import ExamFactory
+from apps.exams.tests.factories import ExamFactory, ExamResultFactory
 from apps.events.tests.factories import EventFactory
 from apps.users.tests.factories import UserFactory, StudentFactory, StaffFactory, StaffProfileFactory, TeacherFactory
 from apps.addresses.tests.factories import (
@@ -66,6 +66,7 @@ register(StaffProfileFactory)
 register(StaffFactory)
 register(StudentFactory)
 register(ExamFactory)
+register(ExamResultFactory)
 register(EventFactory)
 register(CountryFactory)
 register(DivisionFactory)
