@@ -26,16 +26,33 @@ class ExamResultSerializer(serializers.ModelSerializer):
         model = ExamResult
         fields = "__all__"
 
-    def validate(self, attrs):
+    def create(self, validated_data):
         if not ExamAttendance.objects.filter(
-            exam=attrs["exam"], student=attrs["student"], subject=attrs["subject"], status=AttendanceType.PRESENT
-        ):
+            exam=validated_data.get("exam"),
+            student=validated_data.get("student"),
+            subject=validated_data.get("subject"),
+            status=AttendanceType.PRESENT,
+        ).exists():
             raise serializers.ValidationError("Sorry Student do not attend the exam")
         if ExamResult.objects.filter(
-            exam=attrs["exam"],
-            student=attrs["student"],
-            subject=attrs["subject"],
+            exam=validated_data.get("exam"),
+            student=validated_data.get("student"),
+            subject=validated_data.get("subject"),
             created_at__date=timezone.now().date(),
         ).exists():
             raise serializers.ValidationError("Alredy Exam Result create")
-        return attrs
+        obj = ExamResult.objects.create(**validated_data)
+        return obj
+
+    def update(self, instance, validated_data):
+        if not ExamAttendance.objects.filter(
+            exam=validated_data.get("exam") if validated_data.get("exam") else instance.exam.id,
+            student=validated_data.get("student") if validated_data.get("student") else instance.student.id,
+            subject=validated_data.get("subject") if validated_data.get("subject") else instance.subject.id,
+            status=AttendanceType.PRESENT,
+        ).exists():
+            raise serializers.ValidationError("Sorry Student do not attend the exam")
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance
