@@ -88,7 +88,6 @@ class StaffSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        print('self.context["request"].user:', self.context["request"].user)
         if subjects := validated_data.get("subjects"):
             subjects = validated_data.pop("subjects")[0].split(",")
             subjects = [int(element) for element in subjects]
