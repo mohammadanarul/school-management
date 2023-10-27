@@ -8,11 +8,13 @@ class TestExamResultModelViewSet:
     base_url = "/api/v1/exam_results"
 
     def test_unathorized_api(self, api_client, exam_result_factory):
+        """⚠️ user unathorized test"""
         exam_restult = exam_result_factory.create()
         response = api_client.get(f"{self.base_url}/{exam_restult.id}/")
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
     def test_permission_api(self, api_client, user_token, exam_result_factory):
+        """⚠️ user permisssion"""
         exam_restult = exam_result_factory.create()
         jwt_token = user_token
         api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {jwt_token['access_token']}")
@@ -20,6 +22,7 @@ class TestExamResultModelViewSet:
         assert response.status_code == status.HTTP_403_FORBIDDEN
 
     def test_not_found_api(self, api_client, admin_user_token, exam_result_factory):
+        """⚠️ Not Found"""
         exam_result_factory.create()
         jwt_token = admin_user_token
         api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {jwt_token['access_token']}")
@@ -45,6 +48,43 @@ class TestExamResultModelViewSet:
         api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {jwt_token['access_token']}")
         response = api_client.post(f"{self.base_url}")
         assert response.status_code == status.HTTP_301_MOVED_PERMANENTLY
+
+    def test_student_not_attent_in_the_exam(
+        self, api_client, admin_user_token, exam_factory, student_factory, subject_factory
+    ):
+        """⚠️ student not attend in the exam"""
+        json_data = {
+            "exam": exam_factory.create().id,
+            "student": student_factory.create().id,
+            "subject": subject_factory.create().id,
+            "gpa": 3.12,
+        }
+        jwt_token = admin_user_token
+        api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {jwt_token['access_token']}")
+        response = api_client.post(f"{self.base_url}/", json_data)
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert "Sorry, Student do not attend in the exam" == response.data[0]
+
+    def test_exam_result_exit(self, api_client, admin_user_token, exam_attendance_factory, exam_result_factory):
+        """⚠️ Alredy exam result create subject:"""
+        exam_attendance = exam_attendance_factory.create()
+        exam_result = exam_result_factory.create(
+            exam=exam_attendance.exam, student=exam_attendance.student, subject=exam_attendance.subject
+        )
+        exit_exam_result = exam_result_factory.create(
+            exam=exam_result.exam, student=exam_result.student, subject=exam_result.subject
+        )
+        json_data = {
+            "exam": exit_exam_result.exam.id,
+            "student": exit_exam_result.student.id,
+            "subject": exit_exam_result.subject.id,
+            "gpa": 3.12,
+        }
+        jwt_token = admin_user_token
+        api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {jwt_token['access_token']}")
+        response = api_client.post(f"{self.base_url}/", json_data)
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert "Alredy Exam Result create" == response.data[0]
 
     def test_list_api(self, api_client, admin_user_token, exam_result_factory):
         exam_result_factory.create_batch(15)
