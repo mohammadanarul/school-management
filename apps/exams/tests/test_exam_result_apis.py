@@ -16,14 +16,14 @@ class TestExamResultModelViewSet:
         exam_restult = exam_result_factory.create()
         jwt_token = user_token
         api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {jwt_token['access_token']}")
-        response = api_client.get(f"{self.base_url}/{exam_restult.id}/")
+        response = api_client.post(f"{self.base_url}/{exam_restult.id}/")
         assert response.status_code == status.HTTP_403_FORBIDDEN
 
     def test_not_found_api(self, api_client, admin_user_token, exam_result_factory):
         exam_result_factory.create()
         jwt_token = admin_user_token
         api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {jwt_token['access_token']}")
-        response = api_client.get(f"{self.base_url}/3/")
+        response = api_client.get(f"{self.base_url}/20/")
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
     def test_bad_request_api(self, api_client, admin_user_token, exam_attendance_factory):
