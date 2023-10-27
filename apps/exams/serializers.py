@@ -33,7 +33,7 @@ class ExamResultSerializer(serializers.ModelSerializer):
             subject=validated_data.get("subject"),
             status=AttendanceType.PRESENT,
         ).exists():
-            raise serializers.ValidationError("Sorry Student do not attend the exam")
+            raise serializers.ValidationError("Sorry, Student do not attend in the exam")
         if ExamResult.objects.filter(
             exam=validated_data.get("exam"),
             student=validated_data.get("student"),
@@ -51,7 +51,7 @@ class ExamResultSerializer(serializers.ModelSerializer):
             subject=validated_data.get("subject") if validated_data.get("subject") else instance.subject.id,
             status=AttendanceType.PRESENT,
         ).exists():
-            raise serializers.ValidationError("Sorry Student do not attend the exam")
+            raise serializers.ValidationError("Sorry, Student do not attend in the exam")
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
