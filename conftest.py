@@ -2,6 +2,7 @@ import pytest
 from pytest_factoryboy import register
 from rest_framework.test import APIClient
 from django.urls import reverse
+from django.contrib.auth.models import Permission, Group
 from apps.institutes.tests.factories import InstituteFactory, SubjectFactory, KlassFactory, SessionFactory
 from apps.exams.tests.factories import ExamFactory, ExamResultFactory
 from apps.events.tests.factories import EventFactory
@@ -28,6 +29,14 @@ def api_client():
 @pytest.fixture
 def admin_user_token(api_client):
     user = UserFactory()
+    group, created = Group.objects.get_or_create(name="super-admin-group")
+    for perm in Permission.objects.all():
+        group.permissions.add(perm)
+    group.user_set.add(user)
+    group.save()
+    # for perm in permissions:
+    #     user.user_permissions.add(perm)
+    # user.save()
     response = api_client.post(
         reverse("token_obtain_pair"),
         data={"mobile_number": user.mobile_number, "password": "password123"},
